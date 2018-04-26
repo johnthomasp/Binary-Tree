@@ -56,22 +56,15 @@ namespace BSTFromSortedArray
 
     public static class BSTFromSortedArray
     {
-
         static int count = 10;
-
         public static Node GenerateBST(int[] arr, int start, int end)
         {
             if (start > end)
                 return null;
-
             int mid = (start + end) / 2;
-
             Node node = new Node(arr[mid]);
-
             node.LeftChild = GenerateBST(arr, start, mid - 1);
-
             node.RightChild = GenerateBST(arr, mid + 1, end);
-
             return node;
         }
 
@@ -104,8 +97,15 @@ namespace BSTFromSortedArray
     {
         static void Main(string[] args)
         {
-            int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int size = 10;
+            int[] arr = new int[size];
+            Random random = new Random();
 
+            for (int i = 0; i < size; i++)
+            {
+                arr[i] = random.Next(100);
+            }
+            Array.Sort(arr);
             int end = arr.Length - 1;
             Node bst = BSTFromSortedArray.GenerateBST(arr, 0, end);
             BSTFromSortedArray.Print(bst);

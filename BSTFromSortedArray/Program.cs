@@ -68,6 +68,28 @@ namespace BSTFromSortedArray
             return node;
         }
 
+        public static int TreeSize(Node bst)
+        {
+            if (bst == null)
+                return 0;
+            return TreeSize(bst.LeftChild) + TreeSize(bst.RightChild) + 1;
+        }
+
+        public static bool IsBst(Node bst)
+        {
+            return IsBst(bst, int.MinValue, int.MaxValue);
+        }
+
+        public static bool IsBst(Node bst, int min, int max)
+        {
+            if (bst == null)
+                return true;
+            if ((bst.Data < min) || (bst.Data > max))
+                return false;
+
+            return (IsBst(bst.LeftChild, min, bst.Data) && IsBst(bst.RightChild, bst.Data, max));
+        }
+
         public static void printUtil(Node root, int space)
         {
             if (root == null)
@@ -105,10 +127,17 @@ namespace BSTFromSortedArray
             {
                 arr[i] = random.Next(100);
             }
-            Array.Sort(arr);
+
             int end = arr.Length - 1;
+            Node notbst = BSTFromSortedArray.GenerateBST(arr, 0, end);
+            Array.Sort(arr);
             Node bst = BSTFromSortedArray.GenerateBST(arr, 0, end);
+
             BSTFromSortedArray.Print(bst);
+
+            int TreeSize = BSTFromSortedArray.TreeSize(bst);
+            Console.WriteLine("\n\nThe size of the BST is {0}.", size);
+           
             Console.ReadLine();
         }
     }

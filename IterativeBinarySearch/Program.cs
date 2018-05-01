@@ -13,21 +13,20 @@ namespace IterativeBinarySearch
             int[] input = { 1, 4, 7, 10, 18, 20 };
             Console.WriteLine("Please enter a number to search");
             int x = int.Parse(Console.ReadLine());
-            bool inBST = SearchBST(input, input.Count(), x);
+            int pos = SearchBST(input, input.Count(), x);
 
-            if (inBST)
+            if (pos < 0)
             {
-                Console.WriteLine("{0} is in BST", x);
+                Console.WriteLine("{0} is not in BST", x);
             }
             else
             {
-                Console.WriteLine("{0} is not in BST", x);
-
+                Console.WriteLine("{0} is at position {1} in BST", x, pos +1);
             }
             Console.ReadLine();
         }
 
-        private static bool SearchBST(int[] input, int count, int x)
+        private static int SearchBST(int[] input, int count, int x)
         {
             int low = 0;
             int high = count-1;
@@ -36,11 +35,11 @@ namespace IterativeBinarySearch
             {
                 int mid = low + (high - low) / 2;
                 if (x == input[mid])
-                    return true;
+                    return mid;
                 else if (x < input[mid]) high = mid - 1;
                 else low = mid + 1;
             }
-            return false;
+            return -1;
         }
     }
 }

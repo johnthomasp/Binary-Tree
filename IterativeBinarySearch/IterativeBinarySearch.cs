@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IterativeBinarySearch
 {
-    class Program
+    class IterativeBinarySearch
     {
         static void Main(string[] args)
         {
